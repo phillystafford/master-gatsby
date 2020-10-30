@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import styled from 'styled-components';
 
 // * import navigate from gatsby
 // import { Link, navigate } from 'gatsby';
@@ -15,9 +16,13 @@ import { Link } from 'gatsby';
 //   <button onClick={gotToSliceMasters}>2 second route</button>
 // </li>;
 
+const StyledNav = styled.nav`
+  background: red;
+`;
+
 export default function Nav() {
   return (
-    <nav>
+    <StyledNav>
       <ul>
         <li>
           <Link to="/">Hot Now</Link>
@@ -35,6 +40,6 @@ export default function Nav() {
           <Link to="/orders">Order Ahead!</Link>
         </li>
       </ul>
-    </nav>
+    </StyledNav>
   );
 }
