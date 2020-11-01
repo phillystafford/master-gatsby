@@ -6,11 +6,11 @@ export default {
   // invisible title
   title: 'Pizza',
   type: 'document',
+  icon,
   fields: [
     {
       name: 'name',
       title: 'Pizza Name',
-      icon,
       type: 'string',
       description: 'Name of the pizza',
     },
