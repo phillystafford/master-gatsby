@@ -1,10 +1,12 @@
 import React from 'react';
 import PizzaList from '../components/PizzaList';
+import ToppingsFilter from '../components/ToppingsFilter';
 
 export default function PizzasPage({ data }) {
   console.log('PizzasPage -> data', data);
   return (
     <>
+      <ToppingsFilter />
       <PizzaList pizzas={data.pizzas.nodes} />
     </>
   );
