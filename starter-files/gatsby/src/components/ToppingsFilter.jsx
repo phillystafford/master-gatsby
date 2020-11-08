@@ -50,6 +50,7 @@ function countTimesToppingsAreUsed(pizzas) {
 
 export default function ToppingsFilter() {
   // Get a a list of all the toppings
+  // N.B. Toppings is not being used here
   const { toppings, pizzas } = useStaticQuery(graphql`
     query {
       toppings: allSanityTopping {
