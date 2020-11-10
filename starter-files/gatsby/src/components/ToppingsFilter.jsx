@@ -19,7 +19,11 @@ const StyledToppings = styled.div`
       background: white;
       padding: 12px 5px;
     }
-    .active {
+    &.active {
+      background: var(--yellow);
+    }
+    /* or */
+    &[aria-current='page'] {
       background: var(--yellow);
     }
   }
@@ -48,7 +52,7 @@ function countTimesToppingsAreUsed(pizzas) {
   return Object.values(counts).sort((a, b) => b.count - a.count);
 }
 
-export default function ToppingsFilter() {
+export default function ToppingsFilter({ activeTopping }) {
   // Get a a list of all the toppings
   // N.B. Toppings is not being used here
   const { toppings, pizzas } = useStaticQuery(graphql`
@@ -75,8 +79,16 @@ export default function ToppingsFilter() {
 
   return (
     <StyledToppings>
+      <Link to="/pizzas">
+        <span className="name">All</span>
+        <span className="count">{pizzas.nodes.length}</span>
+      </Link>
       {toppingsWithCounts.map((topping) => (
-        <Link to={`/topping/${topping.name}`} key={topping.id}>
+        <Link
+          className={activeTopping === topping.name ? 'active' : ''}
+          to={`/topping/${topping.name}`}
+          key={topping.id}
+        >
           <span className="name">{topping.name}</span>
           <span className="count">{topping.count}</span>
         </Link>
