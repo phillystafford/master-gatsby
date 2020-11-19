@@ -107,9 +107,21 @@ async function turnSliceMastersIntoPages({ graphql, actions }) {
       }
     }
   `);
-  // 2. TODO turn each slicemasters into their own page
 
-  // 3. figure out how many pages there are based on how many slicemasters there are, anad how many per page they
+  // 2. TODO turn each slicemasters into their own page
+  const slicemasterTemplate = path.resolve('./src/templates/Slicemaster.js');
+  data.slicemasters.nodes.forEach((slicemaster) => {
+    actions.createPage({
+      path: `slicemaster/${slicemaster.slug.current}`,
+      component: slicemasterTemplate,
+      context: {
+        name: slicemaster.name,
+        slug: slicemaster.slug.current,
+      },
+    });
+  });
+
+  // 3. figure out how many pages there are based on how many slicemasters there are, and how many per page they
   const pageSize = parseInt(process.env.GATSBY_PAGE_SIZE);
   const pageCount = Math.ceil(data.slicemasters.totalCount / pageSize);
 
@@ -132,6 +144,7 @@ async function turnSliceMastersIntoPages({ graphql, actions }) {
     });
   });
 }
+
 export async function sourceNodes(params) {
   await Promise.all([fetchBeersAndTurnIntoNodes(params)]);
 }
