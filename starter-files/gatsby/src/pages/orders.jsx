@@ -9,6 +9,7 @@ import calculatePizzaPrice from '../utils/calculatePizzaPrice';
 import formatMoney from '../utils/formatMoney';
 import useForm from '../utils/useForm';
 import usePizza from '../utils/usePizza';
+import calculateOrderTotal from '../utils/calculateOrderTotal';
 
 export default function OrdersPage({ data }) {
   const pizzas = data.pizzas.nodes;
@@ -56,8 +57,9 @@ export default function OrdersPage({ data }) {
                 <h2>{pizza.name}</h2>
               </div>
               <div>
-                {['S', 'M', 'L'].map((size) => (
+                {['S', 'M', 'L'].map((size, index) => (
                   <button
+                    key={index}
                     type="button"
                     onClick={() =>
                       addToOrder({
@@ -80,6 +82,13 @@ export default function OrdersPage({ data }) {
             pizzas={pizzas}
             removeFromOrder={removeFromOrder}
           />
+        </fieldset>
+        <fieldset>
+          <h3>
+            Your total order is{' '}
+            {formatMoney(calculateOrderTotal(order, pizzas))} 😰
+          </h3>
+          <button type="submit">Order Ahead</button>
         </fieldset>
       </OrderStyles>
     </>
