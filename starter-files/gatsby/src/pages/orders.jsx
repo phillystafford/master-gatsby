@@ -59,7 +59,7 @@ export default function OrdersPage({ data }) {
               <div>
                 {['S', 'M', 'L'].map((size, index) => (
                   <button
-                    key={index}
+                    key={size}
                     type="button"
                     onClick={() =>
                       addToOrder({
