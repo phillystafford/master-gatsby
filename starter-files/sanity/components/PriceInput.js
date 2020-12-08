@@ -12,7 +12,6 @@ const formatMoney = Intl.NumberFormat('en-IE', {
 }).format;
 
 export default function PriceInput({ type, value, onChange, inputComponent }) {
-  console.log('value -> ', value);
   return (
     <>
       <h2>

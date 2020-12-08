@@ -13,20 +13,31 @@ import calculateOrderTotal from '../utils/calculateOrderTotal';
 
 export default function OrdersPage({ data }) {
   const pizzas = data.pizzas.nodes;
-  console.log('🚀 ~ file: orders.jsx ~ line 12 ~ OrdersPage ~ pizzas', pizzas);
+
   const { values, updateValue } = useForm({
     name: '',
     email: '',
   });
-  const { order, addToOrder, removeFromOrder } = usePizza({
+
+  const {
+    order,
+    addToOrder,
+    removeFromOrder,
+    submitOrder,
+    error,
+    message,
+    isLoading,
+  } = usePizza({
     pizzas,
-    inputs: values,
+    values,
   });
 
-  return (
+  return message ? (
+    <p>{message}</p>
+  ) : (
     <>
       <SEO title="Order A Pizza" />
-      <OrderStyles>
+      <OrderStyles onSubmit={submitOrder}>
         <fieldset>
           <legend>Your Info</legend>
           <label htmlFor="name" id="name">
@@ -88,7 +99,11 @@ export default function OrdersPage({ data }) {
             Your total order is{' '}
             {formatMoney(calculateOrderTotal(order, pizzas))} 😰
           </h3>
-          <button type="submit">Order Ahead</button>
+
+          {error && <p>Error: {error}</p>}
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? 'Placing Order...' : 'Order Ahead'}
+          </button>
         </fieldset>
       </OrderStyles>
     </>
