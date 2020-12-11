@@ -16,7 +16,7 @@ export default function OrdersPage({ data }) {
 
   const { values, updateValue } = useForm({
     name: '',
-    email: '',
+    email: 'jd@dkzldjfnv.com',
   });
 
   const {
@@ -38,7 +38,7 @@ export default function OrdersPage({ data }) {
     <>
       <SEO title="Order A Pizza" />
       <OrderStyles onSubmit={submitOrder}>
-        <fieldset>
+        <fieldset disabled={isLoading}>
           <legend>Your Info</legend>
           <label htmlFor="name" id="name">
             Name
@@ -59,7 +59,7 @@ export default function OrdersPage({ data }) {
             onChange={updateValue}
           />
         </fieldset>
-        <fieldset className="menu">
+        <fieldset disabled={isLoading} className="menu">
           <legend>Menu</legend>
           {pizzas.map((pizza) => (
             <MenuItemStyles key={pizza.id}>
@@ -86,7 +86,7 @@ export default function OrdersPage({ data }) {
             </MenuItemStyles>
           ))}
         </fieldset>
-        <fieldset className="order">
+        <fieldset disabled={isLoading} className="order">
           <legend>Order</legend>
           <PizzaOrder
             order={order}
@@ -94,7 +94,7 @@ export default function OrdersPage({ data }) {
             removeFromOrder={removeFromOrder}
           />
         </fieldset>
-        <fieldset>
+        <fieldset disabled={isLoading}>
           <h3>
             Your total order is{' '}
             {formatMoney(calculateOrderTotal(order, pizzas))} 😰

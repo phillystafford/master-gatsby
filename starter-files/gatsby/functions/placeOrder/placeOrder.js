@@ -35,7 +35,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+function wait(ms = 0) {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 exports.handler = async (event, context) => {
+  // await wait(500);
   console.log(
     '🚀 ~ file: placeOrder.js ~ line 14 ~ exports.handler= ~ event.body',
     event.body
@@ -58,6 +65,16 @@ exports.handler = async (event, context) => {
         }),
       };
     }
+  }
+
+  // make sure the order isn't empty
+  if (!body.order.length) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: `Your order is empty 😰`,
+      }),
+    };
   }
 
   // send the email
