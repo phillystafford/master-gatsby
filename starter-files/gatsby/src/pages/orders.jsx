@@ -17,6 +17,7 @@ export default function OrdersPage({ data }) {
   const { values, updateValue } = useForm({
     name: '',
     email: 'jd@dkzldjfnv.com',
+    address: '',
   });
 
   const {
@@ -46,6 +47,7 @@ export default function OrdersPage({ data }) {
           <input
             type="text"
             name="name"
+            id="name"
             value={values.name}
             onChange={updateValue}
           />
@@ -55,8 +57,17 @@ export default function OrdersPage({ data }) {
           <input
             type="email"
             name="email"
+            id="email"
             value={values.email}
             onChange={updateValue}
+          />
+          <input
+            type="text"
+            name="address"
+            id="address"
+            value={values.address}
+            onChange={updateValue}
+            className="address"
           />
         </fieldset>
         <fieldset disabled={isLoading} className="menu">

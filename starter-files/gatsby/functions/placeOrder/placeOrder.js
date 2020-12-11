@@ -48,6 +48,16 @@ exports.handler = async (event, context) => {
     event.body
   );
   const body = JSON.parse(event.body);
+
+  if (body.address) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: 'Thank you! Somthing went wrong ☹️ ERROR: 1212',
+      }),
+    };
+  }
+
   console.log(
     '🚀 ~ file: placeOrder.js ~ line 19 ~ exports.handler= ~ body',
     body

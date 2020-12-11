@@ -43,6 +43,7 @@ export default function usePizza({ pizzas, values }) {
       total: formatMoney(calculateOrderTotal(order, pizzas)),
       name: values.name,
       email: values.email,
+      address: values.address,
     };
 
     console.log('🚀 ~ file: usePizza.jsx ~ line 35 ~ submitOrder ~ body', body);
