@@ -18,8 +18,6 @@ import Logo from './Logo';
 // </li>;
 
 const StyledNav = styled.nav`
-  margin-bottom: 3rem;
-
   .logo {
     transform: translateY(-25%);
   }
