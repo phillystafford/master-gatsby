@@ -1,40 +1,41 @@
 import React from 'react';
 import useLatestData from '../utils/useLatestData';
+import { HomePageGrid } from '../styles/Grids';
+import LoadingGrid from '../components/LoadingGrid';
 
-function CurrentlySlicing() {
+function CurrentlySlicing({ slicemasters }) {
+  console.log(
+    '🚀 ~ file: index.jsx ~ line 7 ~ CurrentlySlicing ~ slicemasters',
+    slicemasters
+  );
   return (
     <div>
-      <p>Currently slicing</p>
+      {!slicemasters && <LoadingGrid count={40}></LoadingGrid>}
+      {slicemasters && !slicemasters?.length && <p>No one working</p>}
     </div>
   );
 }
 
-function HotSlices() {
+function HotSlices({ hotslices }) {
   return (
     <div>
-      <p>Hot slices</p>
+      {!hotslices && <LoadingGrid count={40}></LoadingGrid>}
+      {hotslices && !hotslices?.length && <p>No one working</p>}
     </div>
   );
 }
 
 export default function HomePage() {
   const { slicemasters, hotSlices } = useLatestData();
-  console.log(
-    '🚀 ~ file: index.jsx ~ line 21 ~ HomePage ~ hotSlices',
-    hotSlices
-  );
-  console.log(
-    '🚀 ~ file: index.jsx ~ line 21 ~ HomePage ~ slicemasters',
-    slicemasters
-  );
+
   return (
     <div className="center">
       <h1>The Best Pizza Downtown!</h1>
       <p>Open 11am to 11pm Every Day</p>
-      <div>
+      <HomePageGrid>
         <CurrentlySlicing slicemasters={slicemasters} />
         <HotSlices hotSlices={hotSlices} />
-      </div>
+      </HomePageGrid>
     </div>
   );
 }
